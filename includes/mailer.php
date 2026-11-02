@@ -5,6 +5,72 @@
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/pdf.php');
 
+
+// Reads one full SMTP reply (handles multi-line "250-..." replies).
+function smtp_read($socket)
+{
+    $reply = '';
+    while (($line = fgets($socket, 1024)) !== false) {
+        $reply .= $line;
+        if (strlen($line) < 4 || $line[3] === ' ') {
+            break;
+        }
+    }
+    return $reply;
+}
+
+// Sends one command (or null to just read the greeting) and checks the reply code.
+function smtp_step($socket, $command, array $ok_codes, &$error)
+{
+    if ($command !== null) {
+        fwrite($socket, $command . "\r\n");
+    }
+    $reply = smtp_read($socket);
+    $code  = (int)substr($reply, 0, 3);
+    if (!in_array($code, $ok_codes, true)) {
+        $error = trim($reply) !== '' ? trim($reply) : 'No response from SMTP server.';
+        return false;
+    }
+    return true;
+}
+
+// Delivers a raw message through Mailtrap. Returns '' on success, or an error text.
+function mailtrap_deliver($to, $raw_message, &$sent)
+{
+    $sent  = false;
+    $error = '';
+
+    $socket = @fsockopen(MAILTRAP_HOST, MAILTRAP_PORT, $errno, $errstr, 8);
+    if (!$socket) {
+        return "Could not connect to Mailtrap ({$errstr}).";
+    }
+    stream_set_timeout($socket, 10);
+
+    $ok =
+        smtp_step($socket, null, [220], $error) &&
+        smtp_step($socket, 'EHLO projecthub.local', [250], $error) &&
+        smtp_step($socket, 'AUTH LOGIN', [334], $error) &&
+        smtp_step($socket, base64_encode(MAILTRAP_USER), [334], $error) &&
+        smtp_step($socket, base64_encode(MAILTRAP_PASS), [235], $error) &&
+        smtp_step($socket, 'MAIL FROM:<' . MAIL_FROM . '>', [250], $error) &&
+        smtp_step($socket, 'RCPT TO:<' . $to . '>', [250, 251], $error) &&
+        smtp_step($socket, 'DATA', [354], $error);
+
+    if ($ok) {
+        // dot-stuff lines starting with "." and end the message with <CRLF>.<CRLF>
+        $body = preg_replace('/^\./m', '..', str_replace(["\r\n", "\r"], "\n", $raw_message));
+        $body = str_replace("\n", "\r\n", $body);
+        fwrite($socket, $body . "\r\n.\r\n");
+        $ok = smtp_step($socket, null, [250], $error);
+    }
+
+    @fwrite($socket, "QUIT\r\n");
+    fclose($socket);
+
+    $sent = $ok;
+    return $ok ? '' : $error;
+}
+
 function send_order_status_email($conn, $order_id)
 {
     // 1. Fetch order summary from view
@@ -153,45 +219,18 @@ function send_order_status_email($conn, $order_id)
         $message .= chunk_split(base64_encode($pdf_data)) . "\r\n\r\n";
         $message .= "--{$boundary}--";
 
-        // Connect via socket
-        $socket = @fsockopen(MAILTRAP_HOST, MAILTRAP_PORT, $errno, $errstr, 5);
-        if ($socket) {
-            $read = @fgets($socket, 512);
-            @fputs($socket, "EHLO projecthub.local\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, "AUTH LOGIN\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, base64_encode(MAILTRAP_USER) . "\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, base64_encode(MAILTRAP_PASS) . "\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, "MAIL FROM: <" . MAIL_FROM . ">\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, "RCPT TO: <" . $order['customer_email'] . ">\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, "DATA\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, $headers . "\r\n" . $message . "\r\n.\r\n");
-            $read = @fgets($socket, 512);
-
-            @fputs($socket, "QUIT\r\n");
-            fclose($socket);
-            $smtp_sent = true;
-        } else {
-            $smtp_error = "Could not connect to Mailtrap ({$errstr}). Saved to local mailoutput.";
-        }
+        // Connect via socket and talk SMTP, checking every reply code
+        $smtp_error = mailtrap_deliver(
+            $order['customer_email'],
+            $headers . "\r\n" . $message,
+            $smtp_sent
+        );
     }
 
     return [
         'success'        => true,
         'smtp_sent'      => $smtp_sent,
+        'smtp_error'     => $smtp_error,
         'mailtrap_used'  => $mailtrap_configured,
         'backup_saved'   => true,
         'pdf_size'       => strlen($pdf_data),

@@ -45,7 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         // Term Test Lab: Send email notification with PDF receipt via Mailtrap (15pts)
         $mail_result = send_order_status_email($conn, $order_id);
 
-        $flash_msg = "Order #{$order_id} status updated to '{$new_status}'. Customer notified via email with PDF receipt.";
+        if (empty($mail_result['mailtrap_used'])) {
+            $flash_msg = "Order #{$order_id} status updated to '{$new_status}'. Email saved to mailoutput/ only (Mailtrap credentials not set in includes/config.php).";
+        } elseif (empty($mail_result['smtp_sent'])) {
+            $flash_msg = "Order #{$order_id} status updated to '{$new_status}', but the Mailtrap email failed: " . ($mail_result['smtp_error'] ?? 'unknown error');
+        } else {
+            $flash_msg = "Order #{$order_id} status updated to '{$new_status}'. Customer notified via email with PDF receipt.";
+        }
         set_flash('success', $flash_msg);
         redirect("admin/order_view.php?order_id={$order_id}");
     } else {

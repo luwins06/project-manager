@@ -48,7 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // 4. Term Test Lab: Send email notification with PDF receipt via Mailtrap (15pts)
             $email_res = send_order_status_email($conn, $order_id);
 
-            set_flash('success', "Order #{$order_id} placed successfully! A dedicated project workspace has been created for your service.");
+            $mail_note = '';
+            if (empty($email_res['mailtrap_used'])) {
+                $mail_note = ' (Email saved to mailoutput/ only: Mailtrap credentials are not set in includes/config.php.)';
+            } elseif (empty($email_res['smtp_sent'])) {
+                $mail_note = ' (Mailtrap email failed: ' . ($email_res['smtp_error'] ?? 'unknown error') . ')';
+            }
+            set_flash('success', "Order #{$order_id} placed successfully! A dedicated project workspace has been created for your service." . $mail_note);
             redirect('orders/my_orders.php');
         } else {
             $errors[] = 'Failed to process transaction. Please try again.';
