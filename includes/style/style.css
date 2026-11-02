@@ -942,7 +942,7 @@ button.is-loading::before {
 .filter-pill {
     border: 1px solid #e7def8;
     background: #fff;
-    color: var(--ink);
+    color: var(--ink) !important; /* global button rule forces white text with !important */
     border-radius: 999px;
     padding: 8px 13px;
     cursor: pointer;
@@ -954,7 +954,7 @@ button.is-loading::before {
 .filter-pill:hover,
 .filter-pill.active {
     background: var(--brand-gradient);
-    color: #fff;
+    color: #fff !important;
     border-color: transparent;
     transform: none;
 }

@@ -125,7 +125,8 @@ $date = date('Y-m-d');
 
       /* toolbar */
       var activeChip = 'all', query = '', input = null, countEl = null, chips = [], empty = null;
-      if (rows().length >= 3) {
+      // the Tasks page has its own search/filter toolbar, so skip the auto one there
+      if (rows().length >= 3 && !table.closest('.interactive-tasks')) {
         var tools = doc.createElement('div');
         tools.className = 'table-tools';
         tools.innerHTML =

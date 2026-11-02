@@ -11,6 +11,39 @@ update_overdue_tasks($conn);
 
 $project_id = (int)($_GET['project_id'] ?? 0);
 
+// Opened from the navbar without a project: send the user to their only
+// project, or let them pick one.
+if ($project_id <= 0) {
+
+    $visible = get_visible_projects($conn);
+
+    if (count($visible) === 1) {
+        redirect('tasks/index.php?project_id=' . (int)$visible[0]['project_id']);
+    }
+
+    include('../includes/header.php');
+    ?>
+    <div class="table-card">
+        <h2>Tasks</h2>
+        <p class="text-muted text-center">Choose a project to see its tasks.</p>
+
+        <?php if (!$visible) { ?>
+            <p class="text-center text-muted">You are not a member of any project yet.</p>
+        <?php } else { ?>
+            <div class="d-flex flex-wrap gap-2 justify-content-center">
+                <?php foreach ($visible as $v) { ?>
+                    <a class="button" href="index.php?project_id=<?php echo (int)$v['project_id']; ?>">
+                        <?php echo e($v['project_name']); ?>
+                    </a>
+                <?php } ?>
+            </div>
+        <?php } ?>
+    </div>
+    <?php
+    include('../includes/footer.php');
+    exit;
+}
+
 $project = get_project($conn, $project_id);
 
 if (!$project || !can_view_project($conn, $project_id)) {
