@@ -1,5 +1,5 @@
 <?php
-// reviews/create.php - Submit Customer Review (MP4: 20pts)
+// reviews/create.php - Submit Customer Review
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -21,7 +21,7 @@ if (empty($serv)) {
     redirect('index.php');
 }
 
-// 2. MP4: Check if customer actually availed this service
+// 2. Check if customer actually availed this service
 if (!customer_has_availed_service($conn, $user_id, $service_id) && !has_role('admin')) {
     set_flash('danger', 'Only customers who have availed this service can submit a review.');
     redirect("services/view.php?service_id={$service_id}");
@@ -34,7 +34,7 @@ if (!empty($existing)) {
     redirect("services/view.php?service_id={$service_id}");
 }
 
-// 4. Validate rating & text in PHP (MP5)
+// 4. Validate rating & text in PHP
 if ($rating < 1 || $rating > 5) {
     set_flash('danger', 'Please provide a valid rating between 1 and 5 stars.');
     redirect("services/view.php?service_id={$service_id}");
@@ -45,7 +45,7 @@ if ($review_text === '') {
     redirect("services/view.php?service_id={$service_id}");
 }
 
-// 5. MP4: Apply Regex bad/foul word masking (5pts)
+// 5. Apply Regex bad/foul word masking
 $filtered_text = filter_profanity($review_text);
 
 // 6. Insert review using prepared statement

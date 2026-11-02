@@ -1,5 +1,5 @@
 <?php
-// orders/checkout.php - Avail Service & Process Transaction (Term Test Lab: 10pts Prepared Statements)
+// orders/checkout.php - Avail Service & Process Transaction
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $unit_price = (float)$service['price'];
         $grand_total = $unit_price * $quantity;
 
-        // 1. Insert into orders table using prepared statements (Term Test: 10pts)
+        // 1. Insert into orders table using prepared statements
         $order_sql = "INSERT INTO orders (user_id, status) VALUES (?, 'Confirmed')";
         $ok1 = db_run($conn, $order_sql, 'i', [$user_id]);
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // 3. Workflow: Auto-spawn client project workspace from confirmed order
             $project_id = spawn_project_from_order($conn, $order_id, $user_id);
 
-            // 4. Term Test Lab: Send email notification with PDF receipt via Mailtrap (15pts)
+            // 4. Send email notification with PDF receipt via Mailtrap
             $email_res = send_order_status_email($conn, $order_id);
 
             $mail_note = '';

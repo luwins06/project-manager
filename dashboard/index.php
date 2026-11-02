@@ -55,7 +55,7 @@ $overdue    = (int)$s['overdue'];
 $unassigned = (int)$s['unassigned'];
 $pending    = $todo + $inprogress;
 
-// Same rule as get_project_progress(): Completed 100%, In Progress 50%, others 0%
+// Same rule as get_project_progress: Completed 100%, In Progress 50%, others 0%
 $progress = $total > 0 ? (int)round(($completed + $inprogress * 0.5) / $total * 100) : 0;
 
 // Overdue tasks (most late first)

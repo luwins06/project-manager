@@ -1,5 +1,5 @@
 <?php
-// admin/orders.php - Admin View All Orders (Term Test Lab: 5pts)
+// admin/orders.php - Admin View All Orders
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -25,7 +25,7 @@ include('../includes/header.php');
 
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
-    <h2 class="fw-bold mb-0">Customer Orders & Transactions (Term Test Lab)</h2>
+    <h2 class="fw-bold mb-0">Customer Orders & Transactions</h2>
     <p class="text-muted mb-0">View all customer orders, itemized transaction details, and update fulfillment statuses.</p>
   </div>
 </div>
@@ -52,7 +52,7 @@ include('../includes/header.php');
             <th>Email</th>
             <th>Items</th>
             <th>Grand Total</th>
-            <th>Status (Term Test: 5pts)</th>
+            <th>Status</th>
             <th class="text-end pe-3">Actions</th>
           </tr>
         </thead>

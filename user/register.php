@@ -1,5 +1,5 @@
 <?php
-// user/register.php - Customer Registration with Profile Photo Upload (MP2: 5pts, MP5: PHP Validation)
+// user/register.php - Customer Registration with Profile Photo Upload
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password         = $_POST['password'] ?? '';
     $confirm_password = $_POST['confirm_password'] ?? '';
 
-    // MP5: Server-side PHP Form Validation (no HTML5 validation)
+    // Server-side PHP Form Validation (no HTML5 validation)
     if ($first_name === '') {
         $errors[] = 'First name is required.';
     }
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Passwords do not match.';
     }
 
-    // Photo upload validation (MP2: 5pts)
+    // Photo upload validation
     $photo_path = null;
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
         $file = $_FILES['photo'];
@@ -121,7 +121,7 @@ include('../includes/header.php');
           </div>
         <?php } ?>
 
-        <!-- MP5: novalidate disables HTML5 validation, PHP performs all checks -->
+        <!-- novalidate disables HTML5 validation, PHP performs all checks -->
         <form method="POST" action="register.php" enctype="multipart/form-data" novalidate>
           <div class="row">
             <div class="col-md-6 mb-3">
@@ -153,10 +153,10 @@ include('../includes/header.php');
             </div>
           </div>
 
-          <!-- MP2: User Registration upload a photo (5pts) -->
+          <!-- User Registration upload a photo -->
           <div class="mb-4">
             <label for="photo" class="form-label fw-semibold">
-              <i class="fa-solid fa-camera text-primary me-1"></i> Profile Photo (MP2: 5pts)
+              <i class="fa-solid fa-camera text-primary me-1"></i> Profile Photo
             </label>
             <input type="file" class="form-control" id="photo" name="photo">
             <small class="text-muted">Upload a personal avatar (JPG, PNG, GIF, max 5MB).</small>

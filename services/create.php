@@ -1,5 +1,5 @@
 <?php
-// services/create.php - Add Service with Single & Multiple Photos (MP1: 20pts, MP5: PHP Validation)
+// services/create.php - Add Service with Single & Multiple Photos
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -13,7 +13,7 @@ $estimated_duration = trim($_POST['estimated_duration'] ?? '');
 $description        = trim($_POST['description'] ?? '');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // MP5: Server-side PHP Validation (no HTML5 validation)
+    // Server-side PHP Validation (no HTML5 validation)
     if ($service_name === '') {
         $errors[] = 'Service name is required.';
     } elseif (mb_strlen($service_name) > 100) {
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Description is required.';
     }
 
-    // Process primary photo (MP1: 15pts)
+    // Process primary photo
     $primary_photo_path = null;
     $allowed_exts = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($ok) {
             $service_id = db_insert_id($conn);
 
-            // Process multiple gallery photos (MP1: 20pts)
+            // Process multiple gallery photos
             if (isset($_FILES['gallery_photos']) && !empty($_FILES['gallery_photos']['name'][0])) {
                 $gallery = $_FILES['gallery_photos'];
                 $total_files = count($gallery['name']);
@@ -127,7 +127,7 @@ include('../includes/header.php');
           </a>
         </div>
         <p class="text-muted small mb-4">
-          Provide complete service details and upload primary/gallery photos. Form validation is processed by PHP (MP5).
+          Provide complete service details and upload primary/gallery photos. Form validation is processed by PHP.
         </p>
 
         <?php if (!empty($errors)) { ?>
@@ -139,7 +139,7 @@ include('../includes/header.php');
           </div>
         <?php } ?>
 
-        <!-- novalidate prevents HTML5 validation (MP5) -->
+        <!-- novalidate prevents HTML5 validation -->
         <form method="POST" action="create.php" enctype="multipart/form-data" novalidate>
           <div class="mb-3">
             <label for="service_name" class="form-label fw-semibold">Service Name</label>
@@ -183,7 +183,7 @@ include('../includes/header.php');
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="primary_photo" class="form-label fw-semibold">
-                <i class="fa-solid fa-image me-1 text-primary"></i> Primary Featured Photo (MP1: 15pts)
+                <i class="fa-solid fa-image me-1 text-primary"></i> Primary Featured Photo
               </label>
               <input type="file" class="form-control" id="primary_photo" name="primary_photo">
               <small class="text-muted">Displayed as the main cover image on cards and catalog.</small>
@@ -191,7 +191,7 @@ include('../includes/header.php');
 
             <div class="col-md-6 mb-3">
               <label for="gallery_photos" class="form-label fw-semibold">
-                <i class="fa-solid fa-images me-1 text-success"></i> Multiple Gallery Photos (MP1: 20pts)
+                <i class="fa-solid fa-images me-1 text-success"></i> Multiple Gallery Photos
               </label>
               <input type="file" class="form-control" id="gallery_photos" name="gallery_photos[]" multiple>
               <small class="text-muted">Hold Ctrl to select multiple screenshots or portfolio images.</small>

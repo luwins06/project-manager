@@ -1,5 +1,5 @@
 <?php
-// admin/user_edit.php - Admin Updates Active User Role & Details (MP2: 5pts, MP5)
+// admin/user_edit.php - Admin Updates Active User Role & Details
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status     = $is_self ? $user['status'] : trim($_POST['status'] ?? '');
     $password   = $_POST['password'] ?? '';
 
-    // MP5: Server-side PHP Validation
+    // Server-side PHP Validation
     if ($first_name === '') {
         $errors[] = 'First name is required.';
     }
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'New password must be at least 8 characters long.';
     }
 
-    // Photo upload (MP2)
+    // Photo upload
     $photo_path = $user['photo'];
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
         $file = $_FILES['photo'];
@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        // MP2: Admin updates an active user's role (5pts)
+        // Admin updates an active user's role
         $sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, role = ?, photo = ?, status = ? WHERE user_id = ?";
         db_run($conn, $sql, 'ssssssi', [$first_name, $last_name, $email, $role, $photo_path, $status, $edit_id]);
 
@@ -164,10 +164,10 @@ include('../includes/header.php');
             <input type="text" class="form-control" id="email" name="email" value="<?php echo e($user['email']); ?>">
           </div>
 
-          <!-- MP2: Admin updates an active user's role (5pts) -->
+          <!-- Admin updates an active user's role -->
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="role" class="form-label fw-semibold">Role (MP2: 5pts)</label>
+              <label for="role" class="form-label fw-semibold">Role</label>
               <select class="form-select" id="role" name="role" <?php echo $is_self ? 'disabled' : ''; ?>>
                 <?php foreach (role_options() as $r_val => $r_lbl) {
                   $sel = ($user['role'] === $r_val) ? 'selected' : '';
@@ -181,7 +181,7 @@ include('../includes/header.php');
             </div>
 
             <div class="col-md-6 mb-3">
-              <label for="status" class="form-label fw-semibold">Status (MP2: 5pts)</label>
+              <label for="status" class="form-label fw-semibold">Status</label>
               <select class="form-select" id="status" name="status" <?php echo $is_self ? 'disabled' : ''; ?>>
                 <option value="active" <?php echo ($user['status'] === 'active') ? 'selected' : ''; ?>>Active</option>
                 <option value="inactive" <?php echo ($user['status'] === 'inactive') ? 'selected' : ''; ?>>Inactive (Deactivated)</option>

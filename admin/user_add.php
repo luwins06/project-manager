@@ -1,5 +1,5 @@
 <?php
-// admin/user_add.php - Admin Add User with Photo & Role (MP2, MP5)
+// admin/user_add.php - Admin Add User with Photo & Role
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -13,7 +13,7 @@ $role       = trim($_POST['role'] ?? 'member');
 $password   = $_POST['password'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // MP5: Server-side PHP Form Validation (no HTML5 validation)
+    // Server-side PHP Form Validation (no HTML5 validation)
     if ($first_name === '') {
         $errors[] = 'First name is required.';
     }
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Password must be at least 8 characters long.';
     }
 
-    // Photo upload (MP2)
+    // Photo upload
     $photo_path = null;
     if (isset($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
         $file = $_FILES['photo'];
@@ -144,7 +144,7 @@ include('../includes/header.php');
 
           <div class="mb-4">
             <label for="photo" class="form-label fw-semibold">
-              <i class="fa-solid fa-camera text-primary me-1"></i> Profile Photo (MP2: 5pts)
+              <i class="fa-solid fa-camera text-primary me-1"></i> Profile Photo
             </label>
             <input type="file" class="form-control" id="photo" name="photo">
             <small class="text-muted">JPG, PNG, WEBP, or GIF (max 5MB).</small>

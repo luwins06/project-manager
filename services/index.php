@@ -1,5 +1,5 @@
 <?php
-// services/index.php - Admin Service Management (MP1 CRUD: 20pts)
+// services/index.php - Admin Service Management
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -20,7 +20,7 @@ include('../includes/header.php');
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
     <h2 class="fw-bold mb-0">Product / Service Management</h2>
-    <p class="text-muted mb-0">Create, update, view, and manage project service offerings and photo galleries (MP1).</p>
+    <p class="text-muted mb-0">Create, update, view, and manage project service offerings and photo galleries.</p>
   </div>
   <a href="<?php echo $base_url; ?>/services/create.php" class="btn btn-primary">
     <i class="fa-solid fa-plus me-1"></i> Add New Service

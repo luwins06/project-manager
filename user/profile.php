@@ -1,5 +1,5 @@
 <?php
-// user/profile.php - My Profile & Photo Upload (MP2: 5pts, MP5: PHP Validation)
+// user/profile.php - My Profile & Photo Upload
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -17,12 +17,12 @@ $user = $rows[0];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
-    // Action 1: Update Profile Info & Photo Upload (MP2: 5pts)
+    // Action 1: Update Profile Info & Photo Upload
     if ($action === 'update_profile') {
         $first_name = trim($_POST['first_name'] ?? '');
         $last_name  = trim($_POST['last_name'] ?? '');
 
-        // MP5: Server-side PHP Form Validation
+        // Server-side PHP Form Validation
         if ($first_name === '') {
             $errors[] = 'First name is required.';
         }
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Last name is required.';
         }
 
-        // Process profile photo upload (MP2: 5pts)
+        // Process profile photo upload
         $photo_path = $user['photo'];
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] !== UPLOAD_ERR_NO_FILE) {
             $file = $_FILES['photo'];
@@ -135,7 +135,7 @@ include('../includes/header.php');
             </div>
             <div class="flex-grow-1">
               <label for="photo" class="form-label fw-semibold mb-1">
-                <i class="fa-solid fa-camera me-1 text-primary"></i> Update Profile Photo (MP2: 5pts)
+                <i class="fa-solid fa-camera me-1 text-primary"></i> Update Profile Photo
               </label>
               <input type="file" class="form-control form-control-sm" id="photo" name="photo">
               <small class="text-muted">Choose a new JPG, PNG, or GIF file (max 5MB).</small>

@@ -1,5 +1,5 @@
 <?php
-// FR-5 Task Creation (Admin, or the Project Manager who created the project, MP5)
+// FR-5 Task Creation (Admin, or the Project Manager who created the project)
 // FR-10: writes 'task_created' / 'task_assigned' to the activity log
 session_start();
 include('../includes/config.php');
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data['due_date']    = $_POST['due_date'] ?? '';
     $data['status']      = $_POST['status'] ?? '';
 
-    // MP5: Server-side PHP validation (no HTML5 validation)
+    // Server-side PHP validation (no HTML5 validation)
     if ($data['title'] === '') {
         $errors[] = 'Task title is required.';
     } elseif (strlen($data['title']) > 150) {

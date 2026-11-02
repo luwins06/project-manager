@@ -1,5 +1,5 @@
 <?php
-// user/login.php - User Login via Email (MP3: 5pts, MP5: PHP Validation)
+// user/login.php - User Login via Email
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -14,7 +14,7 @@ $email = trim($_POST['email'] ?? '');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
-    // MP5: Server-side PHP Form Validation (no HTML5 validation)
+    // Server-side PHP Form Validation (no HTML5 validation)
     if ($email === '') {
         $errors[] = 'Email address is required.';
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -76,10 +76,10 @@ include('../includes/header.php');
           </div>
         <?php } ?>
 
-        <!-- MP5: novalidate disables browser HTML5 validation -->
+        <!-- novalidate disables browser HTML5 validation -->
         <form method="POST" action="login.php" novalidate>
           <div class="mb-3">
-            <label for="email" class="form-label fw-semibold">Email Address (MP3: 5pts)</label>
+            <label for="email" class="form-label fw-semibold">Email Address</label>
             <input type="text" class="form-control" id="email" name="email" 
                    value="<?php echo e($email); ?>" placeholder="name@example.com">
           </div>

@@ -1,5 +1,5 @@
 <?php
-// index.php - Homepage & Service Catalog with Search (Quiz 3: 15pts)
+// index.php - Homepage & Service Catalog with Search
 session_start();
 require_once(__DIR__ . '/includes/config.php');
 require_once(__DIR__ . '/includes/functions.php');
@@ -56,7 +56,7 @@ include(__DIR__ . '/includes/header.php');
   </div>
 </div>
 
-<!-- Homepage Search & Filter Section (Quiz 3: 15pts) -->
+<!-- Homepage Search & Filter Section -->
 <div class="card shadow-sm border-0 mb-4 bg-light">
   <div class="card-body p-3 p-md-4">
     <form method="GET" action="index.php" class="row g-2 align-items-center">
@@ -116,7 +116,7 @@ include(__DIR__ . '/includes/header.php');
   <?php } ?>
 </div>
 
-<!-- Services Grid (MP1 View & Quiz 3 Results) -->
+<!-- Services Grid -->
 <?php if (empty($services)) { ?>
   <div class="alert alert-info text-center py-5 shadow-sm">
     <i class="fa-solid fa-circle-info fa-3x mb-3 text-info"></i>

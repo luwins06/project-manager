@@ -1,5 +1,5 @@
 <?php
-// orders/receipt.php - Generate and Stream PDF Receipt (Term Test Lab: 5pts)
+// orders/receipt.php - Generate and Stream PDF Receipt
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
