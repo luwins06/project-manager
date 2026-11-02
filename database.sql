@@ -6,7 +6,7 @@ CREATE DATABASE IF NOT EXISTS db_taskmanager;
 USE db_taskmanager;
 
 -- ---------------------------------------------------------------
--- 1. Users Table (MP2 User CRUD, MP3 Login/Logout)
+-- 1. Users Table
 -- ---------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS users (
   user_id     INT AUTO_INCREMENT PRIMARY KEY,
@@ -33,7 +33,7 @@ INSERT INTO users (user_id, first_name, last_name, email, password, role, photo,
 ON DUPLICATE KEY UPDATE first_name=VALUES(first_name);
 
 -- ---------------------------------------------------------------
--- 2. Services / Products Table (MP1 Product/Service CRUD)
+-- 2. Services / Products Table
 -- ---------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS services (
   service_id         INT AUTO_INCREMENT PRIMARY KEY,
@@ -55,7 +55,7 @@ INSERT INTO services (service_id, service_name, category, price, estimated_durat
 ON DUPLICATE KEY UPDATE service_name=VALUES(service_name);
 
 -- ---------------------------------------------------------------
--- 3. Service Photos Gallery (MP1: 20pts Multiple Photos)
+-- 3. Service Photos Gallery
 -- ---------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS service_photos (
   photo_id      INT AUTO_INCREMENT PRIMARY KEY,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS service_photos (
 );
 
 -- ---------------------------------------------------------------
--- 4. Customer Orders / Transactions (Term Test Lab & Unit 1 2NF)
+-- 4. Customer Orders / Transactions
 -- ---------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS orders (
   order_id    INT AUTO_INCREMENT PRIMARY KEY,
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 -- ---------------------------------------------------------------
--- 5. Order Items / Line Items (Term Test Lab & Unit 1 2NF)
+-- 5. Order Items / Line Items
 -- ---------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS order_items (
   order_item_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -210,7 +210,7 @@ INSERT INTO activity_log (project_id, task_id, user_id, activity_type, descripti
 (1, NULL, 1, 'project_created', 'Project workspace created automatically from Order #1.');
 
 -- ---------------------------------------------------------------
--- 11. Customer Reviews Table (MP4: 20pts)
+-- 11. Customer Reviews Table
 -- ---------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS reviews (
   review_id     INT AUTO_INCREMENT PRIMARY KEY,
@@ -230,7 +230,7 @@ INSERT INTO reviews (service_id, user_id, rating, review_text) VALUES
 ON DUPLICATE KEY UPDATE review_text=VALUES(review_text);
 
 -- ---------------------------------------------------------------
--- 12. MySQL VIEWS for Order Transaction Details (Unit 1: 20pts)
+-- 12. MySQL VIEWS for Order Transaction Details
 -- ---------------------------------------------------------------
 CREATE OR REPLACE VIEW v_order_details AS
 SELECT 

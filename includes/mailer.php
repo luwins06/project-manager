@@ -1,6 +1,6 @@
 <?php
 // includes/mailer.php - Mailtrap Notification & PDF Receipt Sender
-// Term Test Lab: Sends customer notification with subtotal, grand total, and PDF attachment.
+// Sends customer notification with subtotal, grand total, and PDF attachment.
 
 require_once(__DIR__ . '/config.php');
 require_once(__DIR__ . '/pdf.php');
@@ -175,7 +175,7 @@ function send_order_status_email($conn, $order_id)
           </div>
         </div>
         <div style='background: #f1f5f9; padding: 16px 24px; text-align: center; font-size: 12px; color: #64748b; border-top: 1px solid #e2e8f0;'>
-          ProjectHub System &copy; " . date('Y') . " | ITIM211 Term Test Lab Transaction
+          ProjectHub System &copy; " . date('Y') . "
         </div>
       </div>
     </body>

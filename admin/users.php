@@ -1,5 +1,5 @@
 <?php
-// admin/users.php - User Management (MP2: User CRUD, MP3: Admin Access)
+// admin/users.php - User Management
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -25,7 +25,7 @@ include('../includes/header.php');
 
 <div class="d-flex justify-content-between align-items-center mb-4">
   <div>
-    <h2 class="fw-bold mb-0">User Management (MP2)</h2>
+    <h2 class="fw-bold mb-0">User Management</h2>
     <p class="text-muted mb-0">Manage system users, upload avatars, deactivate accounts, and assign roles.</p>
   </div>
   <a href="<?php echo $base_url; ?>/admin/user_add.php" class="btn btn-primary">
@@ -52,8 +52,8 @@ include('../includes/header.php');
             <th class="ps-3" style="width: 60px;">Photo</th>
             <th>Full Name</th>
             <th>Email</th>
-            <th>Role (MP2: 5pts)</th>
-            <th>Status (MP2: 5pts)</th>
+            <th>Role</th>
+            <th>Status</th>
             <th>Joined Date</th>
             <th class="text-end pe-3">Actions</th>
           </tr>
@@ -102,7 +102,7 @@ include('../includes/header.php');
                   </a>
 
                   <?php if (!$is_self) { ?>
-                    <!-- MP2: Admin can deactivate a user (5pts) -->
+                    <!-- Admin can deactivate a user -->
                     <form method="POST" action="<?php echo $base_url; ?>/admin/user_toggle.php" class="d-inline"
                           onsubmit="return confirm('<?php echo ($u['status'] === 'active') ? 'Deactivate this user account?' : 'Activate this user account?'; ?>');">
                       <input type="hidden" name="user_id" value="<?php echo (int)$u['user_id']; ?>">

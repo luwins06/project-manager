@@ -336,7 +336,7 @@ $date = date('Y-m-d');
       if (sel && sel.value === 'Completed' && /update_status/.test(f.getAttribute('action') || '')) {
         keep('sessionStorage', 'tm-confetti', '1');
       }
-      // loading spinner on the submit button (skipped if a confirm() was cancelled)
+      // loading spinner on the submit button (skipped if a confirm was cancelled)
       setTimeout(function () {
         if (e.defaultPrevented) return;
         var b = $('button[type=submit], button:not([type])', f);

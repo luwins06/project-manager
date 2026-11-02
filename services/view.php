@@ -1,5 +1,5 @@
 <?php
-// services/view.php - Service Details, Multiple Photos Gallery, & Customer Reviews (MP1, MP4)
+// services/view.php - Service Details, Multiple Photos Gallery, & Customer Reviews
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -13,10 +13,10 @@ if (empty($rows)) {
 }
 $service = $rows[0];
 
-// Fetch all gallery photos (MP1: 20pts)
+// Fetch all gallery photos
 $gallery_photos = db_select($conn, "SELECT * FROM service_photos WHERE service_id = ? ORDER BY photo_id ASC", 'i', [$service_id]);
 
-// Fetch all reviews (MP4: 20pts)
+// Fetch all reviews
 $reviews = db_select(
     $conn,
     "SELECT r.*, u.first_name, u.last_name, u.photo AS user_photo 
@@ -36,7 +36,7 @@ if ($review_count > 0) {
     $avg_rating = round($sum / $review_count, 1);
 }
 
-// Check if current user is logged in, and whether they have availed this service (MP4)
+// Check if current user is logged in, and whether they have availed this service
 $can_review = false;
 $user_review = null;
 if (is_logged_in()) {
@@ -68,7 +68,7 @@ include('../includes/header.php');
 </div>
 
 <div class="row g-4 mb-5">
-  <!-- Left Column: Primary Photo & Gallery Photos (MP1: 20pts) -->
+  <!-- Left Column: Primary Photo & Gallery Photos -->
   <div class="col-lg-7">
     <div class="card shadow-sm border-0 overflow-hidden mb-3">
       <?php
@@ -81,7 +81,7 @@ include('../includes/header.php');
            style="max-height: 420px; object-fit: cover;">
     </div>
 
-    <!-- Multiple Photos Gallery Thumbnails (MP1: 20pts) -->
+    <!-- Multiple Photos Gallery Thumbnails -->
     <?php if (!empty($gallery_photos)) { ?>
       <div class="card shadow-sm border-0 p-2">
         <small class="text-muted fw-bold text-uppercase px-2 mb-2 d-block">
@@ -170,7 +170,7 @@ include('../includes/header.php');
   </div>
 </div>
 
-<!-- MP4: Customer Reviews Section (20pts) -->
+<!-- Customer Reviews Section -->
 <div class="card shadow-sm border-0 mb-5">
   <div class="card-header bg-white border-bottom py-3 d-flex justify-content-between align-items-center">
     <h4 class="fw-bold mb-0">
@@ -181,7 +181,7 @@ include('../includes/header.php');
     </span>
   </div>
   <div class="card-body p-4">
-    <!-- Review Form Section (MP4: Only for customers who availed the service) -->
+    <!-- Review Form Section -->
     <div class="mb-5 pb-4 border-bottom">
       <?php if (!is_logged_in()) { ?>
         <div class="alert alert-light border text-center py-3">
@@ -194,7 +194,7 @@ include('../includes/header.php');
             <?php echo $user_review ? '<i class="fa-solid fa-pen-nib me-1 text-primary"></i> Update Your Review' : '<i class="fa-solid fa-star me-1 text-warning"></i> Leave a Review for This Service'; ?>
           </h5>
           <p class="text-muted small mb-3">
-            <i class="fa-solid fa-circle-check text-success me-1"></i> <strong>Verified Purchase:</strong> You have an order for this service. Foul/bad words are masked automatically (MP4).
+            <i class="fa-solid fa-circle-check text-success me-1"></i> <strong>Verified Purchase:</strong> You have an order for this service. Foul/bad words are masked automatically.
           </p>
 
           <form method="POST" action="<?php echo $base_url; ?>/reviews/<?php echo $user_review ? 'edit.php' : 'create.php'; ?>" novalidate>
@@ -243,7 +243,7 @@ include('../includes/header.php');
         <div class="alert alert-secondary border d-flex align-items-center gap-3">
           <i class="fa-solid fa-shield-halved fa-2x text-muted"></i>
           <div>
-            <strong class="d-block text-dark">Review Policy (MP4 Requirement):</strong>
+            <strong class="d-block text-dark">Review Policy:</strong>
             <span class="small text-muted">
               Only verified customers who have completed or confirmed an order for this service can leave a review. Avail this service package above to share your feedback!
             </span>
@@ -259,7 +259,7 @@ include('../includes/header.php');
     <?php } else { ?>
       <div class="d-flex flex-column gap-3">
         <?php foreach ($reviews as $rev) { 
-          // MP4: Regex masked foul words applied to review_text
+          // Regex masked foul words applied to review_text
           $clean_comment = filter_profanity($rev['review_text']);
         ?>
           <div class="p-3 rounded border bg-light-subtle">
@@ -283,7 +283,7 @@ include('../includes/header.php');
               } ?>
             </div>
 
-            <!-- Review Text with Regex Filter (MP4: 5pts) -->
+            <!-- Review Text with Regex Filter -->
             <p class="mb-0 text-secondary"><?php echo nl2br(e($clean_comment)); ?></p>
           </div>
         <?php } ?>

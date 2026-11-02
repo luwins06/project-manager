@@ -1,5 +1,5 @@
 <?php
-// FR-3 Project Creation (Admin and Project Manager only, MP5 PHP Validation)
+// FR-3 Project Creation (Admin and Project Manager only)
 session_start();
 include('../includes/config.php');
 include('../includes/functions.php');
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data['deadline']     = $_POST['deadline'] ?? '';
     $data['status']       = $_POST['status'] ?? '';
 
-    // MP5: Server-side PHP validation (no HTML5 validation)
+    // Server-side PHP validation (no HTML5 validation)
     if ($data['project_name'] === '') {
         $errors[] = 'Project name is required.';
     } elseif (strlen($data['project_name']) > 100) {

@@ -1,5 +1,5 @@
 <?php
-// reviews/edit.php - Update Customer Review (MP4: 5pts)
+// reviews/edit.php - Update Customer Review
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -28,7 +28,7 @@ if ((int)$rev['user_id'] !== $user_id && !has_role('admin')) {
     redirect("services/view.php?service_id={$service_id}");
 }
 
-// PHP Form Validation (MP5)
+// PHP Form Validation
 if ($rating < 1 || $rating > 5) {
     set_flash('danger', 'Please provide a valid rating between 1 and 5 stars.');
     redirect("services/view.php?service_id={$service_id}");
@@ -39,7 +39,7 @@ if ($review_text === '') {
     redirect("services/view.php?service_id={$service_id}");
 }
 
-// MP4: Regex bad/foul word masking (5pts)
+// Regex bad/foul word masking
 $filtered_text = filter_profanity($review_text);
 
 // Update review using prepared statement

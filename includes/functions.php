@@ -1,6 +1,6 @@
 <?php
 // includes/functions.php
-// Shared helpers. Include AFTER session_start() and config.php on every page.
+// Shared helpers. Include AFTER session_start and config.php on every page.
 
 /* ---------- Output / navigation ---------- */
 
@@ -835,7 +835,7 @@ function order_status_badge($status)
     return "<span class='badge text-bg-{$c}'>" . e($status) . "</span>";
 }
 
-// MP4: Regex filter to mask foul / bad words
+// Regex filter to mask foul / bad words
 function filter_profanity($text)
 {
     $bad_words = [
@@ -848,7 +848,7 @@ function filter_profanity($text)
     }, $text);
 }
 
-// MP4: Check if customer has availed the service before allowing review
+// Check if customer has availed the service before allowing review
 function customer_has_availed_service($conn, $user_id, $service_id)
 {
     $rows = db_select(

@@ -1,5 +1,5 @@
 <?php
-// services/edit.php - Edit Service & Manage Photos (MP1: 20pts, MP5: PHP Validation)
+// services/edit.php - Edit Service & Manage Photos
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description        = trim($_POST['description'] ?? '');
     $status             = trim($_POST['status'] ?? 'active');
 
-    // MP5: Server-side PHP Validation (no HTML5 validation)
+    // Server-side PHP Validation (no HTML5 validation)
     if ($service_name === '') {
         $errors[] = 'Service name is required.';
     } elseif (mb_strlen($service_name) > 100) {
@@ -223,7 +223,7 @@ include('../includes/header.php');
             </div>
           </div>
 
-          <!-- Existing Gallery Photos & Upload More (MP1: 20pts) -->
+          <!-- Existing Gallery Photos & Upload More -->
           <div class="card mb-4 border bg-light">
             <div class="card-body">
               <h5 class="fw-bold mb-2"><i class="fa-solid fa-images text-success me-1"></i> Gallery Photos (<?php echo count($photos); ?>)</h5>

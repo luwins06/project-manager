@@ -1,5 +1,5 @@
 <?php
-// admin/order_view.php - Transaction Details & Order Status Update (Term Test Lab: 35pts)
+// admin/order_view.php - Transaction Details & Order Status Update
 session_start();
 require_once('../includes/config.php');
 require_once('../includes/functions.php');
@@ -16,7 +16,7 @@ if (empty($order_rows)) {
 }
 $order = $order_rows[0];
 
-// Fetch itemized details from view (Unit 1 MySQL Views: 20pts)
+// Fetch itemized details from view
 $items = db_select($conn, "SELECT * FROM v_order_details WHERE order_id = ?", 'i', [$order_id]);
 
 // Check if a project is already linked to this order
@@ -25,7 +25,7 @@ $linked_project = $proj_rows[0] ?? null;
 
 $email_status_msg = '';
 
-// Handle Status Update (Term Test Lab: 5pts)
+// Handle Status Update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_status') {
     $new_status = trim($_POST['status'] ?? '');
 
@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             }
         }
 
-        // Term Test Lab: Send email notification with PDF receipt via Mailtrap (15pts)
+        // Send email notification with PDF receipt via Mailtrap
         $mail_result = send_order_status_email($conn, $order_id);
 
         if (empty($mail_result['mailtrap_used'])) {
@@ -146,7 +146,7 @@ include('../includes/header.php');
         </div>
       </div>
 
-      <!-- Update Status Card (Term Test Lab: 5pts) -->
+      <!-- Update Status Card -->
       <div class="col-md-6">
         <div class="card shadow-sm border-0 h-100">
           <div class="card-header bg-white border-bottom py-3">
@@ -179,7 +179,7 @@ include('../includes/header.php');
       </div>
     </div>
 
-    <!-- Itemized Services Breakdown (Unit 1 View & Term Test: 5pts) -->
+    <!-- Itemized Services Breakdown -->
     <div class="card shadow-sm border-0 mb-4">
       <div class="card-header bg-white border-bottom py-3">
         <h5 class="fw-bold mb-0">

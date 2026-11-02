@@ -19,7 +19,7 @@ mysqli_set_charset($conn, "utf8mb4");
 // Base URL: folder path under web root
 $base_url = "/itim211-2b-taskmanager";
 
-// Mailtrap SMTP Configuration (Term Test Lab)
+// Mailtrap SMTP Configuration
 // Sign up free at https://mailtrap.io/ to view your inbox credentials
 define('MAILTRAP_HOST', 'sandbox.smtp.mailtrap.io');
 define('MAILTRAP_PORT', 2525);
