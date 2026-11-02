@@ -23,7 +23,7 @@ $base_url = "/itim211-2b-taskmanager";
 // Sign up free at https://mailtrap.io/ to view your inbox credentials
 define('MAILTRAP_HOST', 'sandbox.smtp.mailtrap.io');
 define('MAILTRAP_PORT', 2525);
-define('MAILTRAP_USER', 'mailtrap_user_placeholder');
-define('MAILTRAP_PASS', 'mailtrap_pass_placeholder');
+define('MAILTRAP_USER', '53a3d7cc082633');
+define('MAILTRAP_PASS', '9f149cdc5ac959');
 define('MAIL_FROM', 'orders@projecthub.local');
 define('MAIL_FROM_NAME', 'ProjectHub Service Platform');

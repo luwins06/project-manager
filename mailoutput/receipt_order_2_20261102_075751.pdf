@@ -1,0 +1,142 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 4 0 R /F2 5 0 R >> >> /MediaBox [0 0 612 792] /Contents 6 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+6 0 obj
+<< /Length 1457 >>
+stream
+0.12 0.25 0.45 rg
+40 700 532 60 re f
+BT
+/F2 20 Tf
+1 1 1 rg
+55 725 Td
+(ProjectHub - Transaction Receipt) Tj
+ET
+BT
+/F1 10 Tf
+0.85 0.9 1 rg
+55 710 Td
+(Digital Agency & Project Management Platform | Order #2) Tj
+ET
+0.96 0.97 0.98 rg
+40 610 532 75 re f
+0.8 0.85 0.9 RG
+1 w
+40 610 532 75 re s
+BT
+/F2 11 Tf
+0.15 0.2 0.25 rg
+55 665 Td
+(Customer Details:) Tj
+ET
+BT
+/F1 10 Tf
+0.2 0.2 0.2 rg
+55 648 Td
+(Name: Alexis Salinas) Tj
+ET
+BT
+/F1 10 Tf
+0.2 0.2 0.2 rg
+55 632 Td
+(Email: alex@taskmanager.local) Tj
+ET
+BT
+/F2 11 Tf
+0.15 0.2 0.25 rg
+330 665 Td
+(Order Information:) Tj
+ET
+BT
+/F1 10 Tf
+0.2 0.2 0.2 rg
+330 648 Td
+(Date: 2026-11-02 14:57:51) Tj
+ET
+BT
+/F1 10 Tf
+0.2 0.2 0.2 rg
+330 632 Td
+(Status: CONFIRMED) Tj
+ET
+0.2 0.35 0.6 rg
+40 575 532 25 re f
+BT
+/F2 10 Tf
+1 1 1 rg
+55 583 Td
+(Service / Package Description) Tj
+225 0 Td
+(Category) Tj
+95 0 Td
+(Price) Tj
+55 0 Td
+(Qty) Tj
+50 0 Td
+(Subtotal) Tj
+ET
+0.9 0.9 0.9 RG
+0.5 w
+40 545 m 572 545 l s
+BT
+/F1 10 Tf
+0.15 0.15 0.15 rg
+55 550 Td
+(UI/UX Brand Design & Prototyping) Tj
+225 0 Td
+(UI/UX Design) Tj
+95 0 Td
+(PHP 15,000.00) Tj
+55 0 Td
+(1) Tj
+50 0 Td
+(PHP 15,000.00) Tj
+ET
+0.12 0.25 0.45 rg
+340 503 232 30 re f
+BT
+/F2 13 Tf
+1 1 1 rg
+355 511 Td
+(Grand Total:) Tj
+100 0 Td
+(PHP 15,000.00) Tj
+ET
+BT
+/F1 9 Tf
+0.5 0.5 0.5 rg
+55 60 Td
+(Thank you for choosing ProjectHub. Once confirmed, your project workspace is created automatically.) Tj
+0 -14 Td
+(ITIM211 Information Management 2026 | Generated on 2026-11-02 07:57:51) Tj
+ET
+
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000251 00000 n 
+0000000321 00000 n 
+0000000396 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+1905
+%%EOF
