@@ -317,6 +317,7 @@ include('../includes/header.php');
                         <tr
                             class="task-item"
                             data-status="<?php echo e($t['status']); ?>"
+                            data-task-status="<?php echo e($t['status']); ?>"
                             data-search="<?php echo e($searchText); ?>"
                         >
 
@@ -506,6 +507,9 @@ include('../includes/header.php');
 
                             <article
                                 class="kanban-card task-board-item"
+                                data-task-status="<?php
+                                    echo e($t['status']);
+                                ?>"
                                 data-status="<?php
                                     echo e($t['status']);
                                 ?>"
@@ -640,7 +644,7 @@ include('../includes/header.php');
 
         return (
             filter === 'all' ||
-            element.dataset.status === filter
+            element.dataset.taskStatus === filter
         ) &&
         (
             !q ||
